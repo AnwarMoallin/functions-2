@@ -39,11 +39,11 @@ Write a one line function (give a name of your choice) with an implicit return t
 */
 
 // CODE HERE
-const implicit = (parameter1, parameter2) => console.log(`The first paramter is ${parameter1}. The second parameter is ${parameter2}`)
-
+const printParam =(param1,param2)=> console.log(`The first parameter is ${param1}. The second parameter is ${param2}`)
 
 // INVOKE THE FUNCTION HERE. THE PARAMETERS TAKE ANY DATATYPE.
-implicit('Peter', 'Griffin')
+printParam('hello',5)
+
 ////////// PROBLEM 3 //////////
 /*
 Write a function called 'greeting' that takes 3 parameters: firstName, lastName, and a callback function. In the function, invoke the callback, passing in a concatenation of firstName and lastName. 
@@ -51,10 +51,15 @@ Then, outside of the greeting function, invoke the greeting function, passing in
 */
 
 // CODE 'GREETING FUNCTION' HERE
-
+const greeting = function(firstName, lastName, callback) {
+  callback(firstName, lastName)
+  
+}
 
 // INVOKE 'GREETING FUNCTION' HERE
-
+greeting("Anwar", "Moallin",(fullName)=>{
+  console.log(`Hello, my full name is ${fullName}`)       
+})
 
 ////////// PROBLEM 4 //////////
 
@@ -69,7 +74,12 @@ Write a function called 'pricesPlusTax' that takes 2 params: an array ('prices' 
 */
 
 // CODE HERE
-
+const pricesPlusTax =(arr,callback) =>{
+  for(let i = 0; i < arr.length; i++){
+    totalCost.push(arr[i] + arr[i]*.20)
+  }
+  callback(totalCost)
+}
 
 /* 
 Invoke the 'pricesPlusTax' function, passing in the 'prices' array and a callback function (passing in 'totalCost' as a param) that will print "The new array plus tax = [totalCost]"
@@ -77,6 +87,9 @@ Invoke the 'pricesPlusTax' function, passing in the 'prices' array and a callbac
 
 // CODE HERE
 
+pricesPlusTax(prices,(totalCost) =>{
+  console.log(`The new array plus tax = ${totalCost}`)
+})
 
 ////////// PROBLEM 5 //////////
 
@@ -89,13 +102,22 @@ The inner function should run this logic: if the first number passing in is grea
 */
 
 // CODE HERE
-
+const multiplyingFactory = (num) => {
+  return function anotherFunc(num2){
+    if(num >= 5){
+      console.log(num * num2)
+    } else{
+      console.log("Cannot multiply: the first number is smaller than         5.")
+    }
+  }
+}
 
 /* 
 Let's invoke the 'multiplyingFactory' function that will return another function, and save it into a variable called 'timesFour.' Let's pass in number 3 as a param.
 */
 
 // CODE HERE
+let timesFour = multiplyingFactory(3)
 
 
 /* 
@@ -107,8 +129,10 @@ Run the code in node to see the printed result. You should see "Cannot multiply:
 */
 
 // INVOKE 'timesFour' HERE
-
+timesFour(4)
 
 /* 
 Change the param for 'multiplyingFactory' invocation to number 5. Then invoke 'timesFour' again, passing in number 4. Run the code in node, and you should see 20.
 */
+timesFour = multiplyingFactory(5)
+timesFour(4)
